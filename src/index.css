@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --navy: #0a192f;
+  --gold: #FFD700;
+  --saffron: #FF9933;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+body {
+  background-color: var(--navy);
+  color: #8892b0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom glowing text */
+.text-glow {
+  text-shadow: 0 0 8px var(--gold), 0 0 10px var(--saffron);
+}

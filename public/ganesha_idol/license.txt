@@ -1,0 +1,11 @@
+Model Information:
+* title:	Lord Ganesha
+* source:	https://sketchfab.com/3d-models/lord-ganesha-24fc6ec7a7c54f4dabc8ba5c19267769
+* author:	Premananda (https://sketchfab.com/djoty108)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Lord Ganesha" (https://sketchfab.com/3d-models/lord-ganesha-24fc6ec7a7c54f4dabc8ba5c19267769) by Premananda (https://sketchfab.com/djoty108) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
