@@ -23,8 +23,6 @@ const GalleryItem = memo(({ photo, index, openLightbox }) => {
 });
 
 export const Gallery = () => {
-  // THE FIX: We select each piece of state needed, one by one.
-  // This ensures the component only re-renders when these specific values change.
   const photos = usePhotoStore((state) => state.photos);
   const openLightbox = usePhotoStore((state) => state.openLightbox);
   const loading = usePhotoStore((state) => state.loading);
@@ -36,7 +34,8 @@ export const Gallery = () => {
 
   return (
     <motion.div
-      className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 max-w-6xl mx-auto backdrop-blur-sm bg-navy/30 rounded-lg"
+      // CHANGED: Updated grid columns for a denser layout
+      className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4 p-4 max-w-6xl mx-auto backdrop-blur-sm bg-navy/30 rounded-lg"
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}

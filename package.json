@@ -13,11 +13,13 @@
     "@react-three/drei": "^10.7.3",
     "@react-three/fiber": "^9.3.0",
     "@supabase/supabase-js": "^2.56.0",
+    "file-saver": "^2.0.5",
     "framer-motion": "^12.23.12",
     "html2canvas": "^1.4.1",
     "lucide-react": "^0.541.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-webcam": "^7.2.0",
     "zustand": "^5.0.8"
   },
   "devDependencies": {

@@ -1,4 +1,6 @@
-import { useEffect, Suspense, lazy } from 'react';
+import { useEffect, Suspense, lazy, useState } from 'react';
+import { motion } from 'framer-motion';
+import { LayoutGrid } from 'lucide-react';
 import { usePhotoStore } from './store/photoStore';
 import { supabase } from './supabaseClient';
 import { Loader } from './components/Loader';
@@ -8,9 +10,11 @@ import { UploadButton } from './components/UploadButton';
 const GaneshaScene = lazy(() => import('./components/canvas/GaneshaScene').then(module => ({ default: module.GaneshaScene })));
 const Gallery = lazy(() => import('./components/Gallery').then(module => ({ default: module.Gallery })));
 const Lightbox = lazy(() => import('./components/Lightbox').then(module => ({ default: module.Lightbox })));
+const PhotoCollage = lazy(() => import('./components/PhotoCollage').then(module => ({ default: module.PhotoCollage })));
 
 function App() {
-  const { fetchPhotos, handleNewUpload } = usePhotoStore();
+  const { photos, fetchPhotos, handleNewUpload } = usePhotoStore();
+  const [showCollage, setShowCollage] = useState(false);
 
   useEffect(() => {
     fetchPhotos();
@@ -18,7 +22,12 @@ function App() {
     const channel = supabase
       .channel('public:photos')
       .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'photos' }, (payload) => {
-        handleNewUpload(payload.new);
+        const newPhoto = payload.new;
+        const img = new Image();
+        img.src = `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/photos/${newPhoto.image_path}`;
+        img.onload = () => {
+          handleNewUpload({ ...newPhoto, width: img.width, height: img.height });
+        };
       })
       .subscribe();
 
@@ -39,10 +48,31 @@ function App() {
         <Suspense fallback={<Loader />}>
           <Gallery />
         </Suspense>
+
+        {/* NEW: Collage button is now here, at the bottom */}
+        {photos.length > 0 && (
+          <div className="flex justify-center my-12">
+            <motion.button 
+              onClick={() => setShowCollage(true)} 
+              className="flex items-center gap-2 px-6 py-3 font-semibold text-saffron rounded-lg border border-saffron/50 bg-light-navy/50 backdrop-blur-xl hover:bg-saffron/10 hover:border-saffron transition-colors" 
+              whileTap={{ scale: 0.95 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
+            >
+              <LayoutGrid size={18}/> 
+              Create Collage
+            </motion.button>
+          </div>
+        )}
       </div>
 
       <Suspense fallback={null}>
         <Lightbox />
+      </Suspense>
+      
+      <Suspense fallback={null}>
+        {showCollage && <PhotoCollage photos={photos} onClose={() => setShowCollage(false)} />}
       </Suspense>
     </>
   );
