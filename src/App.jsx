@@ -16,9 +16,12 @@ function App() {
   const { photos, fetchPhotos, handleNewUpload } = usePhotoStore();
   const [showCollage, setShowCollage] = useState(false);
 
+  // This effect runs once on component mount
   useEffect(() => {
+    // 1. Fetch the initial data
     fetchPhotos();
 
+    // 2. Set up the realtime subscription for instant updates
     const channel = supabase
       .channel('public:photos')
       .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'photos' }, (payload) => {
@@ -30,9 +33,17 @@ function App() {
         };
       })
       .subscribe();
+      
+    // 3. NEW: Set up a one-minute interval to re-fetch data as a failsafe
+    const refreshInterval = setInterval(() => {
+      console.log('Refreshing data...');
+      fetchPhotos();
+    }, 60000); // 60,000 milliseconds = 1 minute
 
+    // Cleanup function to remove the subscription and interval when the app closes
     return () => {
       supabase.removeChannel(channel);
+      clearInterval(refreshInterval);
     };
   }, [fetchPhotos, handleNewUpload]);
 
@@ -49,7 +60,6 @@ function App() {
           <Gallery />
         </Suspense>
 
-        {/* NEW: Collage button is now here, at the bottom */}
         {photos.length > 0 && (
           <div className="flex justify-center my-12">
             <motion.button 
@@ -75,7 +85,6 @@ function App() {
         {showCollage && <PhotoCollage photos={photos} onClose={() => setShowCollage(false)} />}
       </Suspense>
     </>
-    
   );
 }
 
