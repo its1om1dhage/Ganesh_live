@@ -13,6 +13,7 @@
     "@react-three/drei": "^10.7.3",
     "@react-three/fiber": "^9.3.0",
     "@supabase/supabase-js": "^2.56.0",
+    "browser-image-compression": "^2.0.2",
     "file-saver": "^2.0.5",
     "framer-motion": "^12.23.12",
     "html2canvas": "^1.4.1",
