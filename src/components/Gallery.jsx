@@ -34,8 +34,8 @@ export const Gallery = () => {
 
   return (
     <motion.div
-      // CHANGED: Updated grid columns for a denser layout
-      className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4 p-4 max-w-6xl mx-auto backdrop-blur-sm bg-navy/30 rounded-lg"
+    
+      className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-4 gap-4 p-4 max-w-6xl mx-auto backdrop-blur-sm bg-navy/30 rounded-lg"
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}

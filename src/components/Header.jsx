@@ -12,8 +12,9 @@ export const Header = () => (
                  bg-gradient-to-r from-gold via-saffron to-marigold 
                  bg-[length:200%_auto] animate-gradientShift" // CHANGED: Applied gradient animation
     >
-      The Divine Spark
+     JIT CHA BAPPA
     </h1>
-    <p className="font-body text-slate text-lg mt-4">An Interactive Offering to Lord Ganesha</p>
+    <p className="font-body text-slate text-lg mt-4">An Interactive Offering to Lord Ganesha by:- Ayush Mishra</p>
+    
   </motion.header>
 );

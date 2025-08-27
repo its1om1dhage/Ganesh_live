@@ -75,6 +75,7 @@ function App() {
         {showCollage && <PhotoCollage photos={photos} onClose={() => setShowCollage(false)} />}
       </Suspense>
     </>
+    
   );
 }
 
