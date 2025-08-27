@@ -38,7 +38,7 @@ function App() {
     const refreshInterval = setInterval(() => {
       console.log('Refreshing data...');
       fetchPhotos();
-    }, 60000); // 60,000 milliseconds = 1 minute
+    }, 20000); 
 
     // Cleanup function to remove the subscription and interval when the app closes
     return () => {
